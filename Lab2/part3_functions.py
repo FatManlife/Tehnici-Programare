@@ -68,6 +68,79 @@ def get_header(url, name, default="lipsește"):
     res = rq.get(url)
     return res.headers[name]
 
-print(get_header(BASE_URL, name="Server"))
+#print(get_header(BASE_URL, name="Server"))
 
 #Ex30
+def security_headers(url:str):
+    res = rq.get(url)
+    d = {
+        "Strict-Transport-Security" : True if res.headers.get("Strict-Transport-Security") else False,
+        "Content-Security-Policy" : True if res.headers.get("Content-Security-Policy") else False,
+        "X-Frame-Options" : True if res.headers.get("X-Frame-Options") else False,
+        "X-Content-Type-Options" : True if res.headers.get("X-Content-Type-Options") else False,
+        "Referrer-Policy" : True if res.headers.get("Referrer-Policy") else False
+    }
+
+    return d
+
+
+# print(security_headers(BASE_URL))
+
+#Ex31
+# def score_headers(results: dict):
+#     ctr = 0
+#     for _, val in results.items():
+#         if val: 
+#             ctr +=1
+#     print(f"{ctr}/{len(results)}")
+
+# score_headers(security_headers(BASE_URL))
+
+#Ex33
+def fetch_robots(base):
+    res = rq.get(base + "/robots.txt")
+    return res.text if res.status_code == 200 else None
+
+def disallowed_paths(robots_text):
+    if robots_text == None:
+        return 
+
+    paths = []
+
+
+    for line in robots_text.splitlines():
+        if line.startswith("Dissalow:"):
+            paths.append(line.split(":")[1])
+
+    return paths
+    
+
+# print(disallowed_paths(fetch_robots(BASE_URL)))
+
+#Ex33
+def  response_times(*urls):
+    if len(urls) == 0: 
+        return 
+
+    d = {}
+
+    for url in urls:
+        res = rq.get(url)
+        d[url] = res.elapsed.total_seconds()
+
+    return d
+
+# print(response_times(BASE_URL ,BASE_URL + "/robots.txt"))
+
+#Ex34
+def log(message, **details):
+    str = message
+
+    for detail in details:
+        str += " | " + f"{detail}={details[detail]}"
+
+    print(str)
+
+# log("verificat", url=BASE_URL, status=200)
+
+#daca doar o afisam atunci nu o putem utiliza valaorea mai tarziu dar daca o returnam putem 
