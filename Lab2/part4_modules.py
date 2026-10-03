@@ -20,6 +20,7 @@ response = rq.get(BASE_URL, timeout=TIMEOUT)
 
 #Ex 35
 def decompose_url(url):
+    """Descompune un URL în componentele sale și le afișează."""
     res = urllib.parse.urlparse(url)
 
     print(f"scheme : {res.scheme}")
@@ -32,6 +33,7 @@ def decompose_url(url):
 
 #Ex36
 def compunere_url(base, path):
+    """Construiește și afișează un URL folosind o adresă de bază și o cale."""
     res = urllib.parse.urljoin(base, path)
     print(res)
 
@@ -41,6 +43,7 @@ def compunere_url(base, path):
 
 #Ex37
 def extract_links(html):
+    """Extrage și afișează legăturile dintr-un document HTML."""
     res = list(set(re.findall(r'href="([^"]+)"', html)))
     print(res)
 
@@ -48,6 +51,7 @@ def extract_links(html):
 
 #Ex38
 def split_links(links, domain):
+    """Separă legăturile în interne și externe în funcție de domeniul specificat."""
     internal = []
     external = []
 
@@ -77,6 +81,7 @@ def split_links(links, domain):
 #Ex39
 
 class ImageFinder(HTMLParser):
+    """Parser HTML care identifică și stochează sursele imaginilor din document."""
     def __init__(self):
         super().__init__()
         self.images = []
@@ -121,6 +126,7 @@ test_html = """
 
 #Ex40
 def page_fingerprint(url):
+    """Calculează și returnează amprenta SHA-256 a conținutului unei pagini."""
     response = rq.get(url, timeout=TIMEOUT)
     return hashlib.sha256(response.content).hexdigest()
 
@@ -129,6 +135,7 @@ def page_fingerprint(url):
 
 #EX41
 def save_read_json(url):
+    """Salvează header-ele unui răspuns HTTP într-un fișier JSON și apoi le citește."""
     res = rq.get(url, timeout=TIMEOUT) 
 
     with open("data.json", "w+") as file:
@@ -146,11 +153,13 @@ def save_read_json(url):
 
 #Ex42
 def resolve(hostname):
+    """Rezolvă un nume de domeniu și returnează adresa sa IP."""
     return socket.gethostbyname(hostname)
 # print(resolve("cybercor.org"))
 
 #Ex43
 def cert_days_left(hostname):
+    """Calculează și returnează numărul de zile rămase până la expirarea certificatului SSL."""
     context = ssl.create_default_context()
     sock = socket.create_connection((hostname, 443))
     sock = context.wrap_socket(sock, server_hostname=hostname)

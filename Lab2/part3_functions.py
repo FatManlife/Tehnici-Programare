@@ -9,12 +9,14 @@ TIMEOUT = 10
 
 #Ex21
 # def fetch(url:str):
+"""Trimite o cerere HTTP către URL-ul specificat și returnează răspunsul."""
 #     return rq.get(url, timeout=TIMEOUT)
 
 #print(fetch(BASE_URL).text)
 
 #Ex22
 def get_status(url:str) -> int:
+    """Returnează codul de stare HTTP pentru URL-ul specificat."""
     time.sleep(1)
     res = rq.get(BASE_URL + url, timeout=TIMEOUT) 
     return res.status_code
@@ -25,6 +27,7 @@ def get_status(url:str) -> int:
 
 #Ex23
 def fetch(url:str, timeout:int=10):
+    """Trimite o cerere HTTP către URL-ul specificat și returnează răspunsul."""
     return rq.get(url, timeout=timeout)
 
 # print(fetch(BASE_URL))
@@ -45,6 +48,7 @@ def get_title(html:str) -> str:
 
 #Ex27
 def page_exists(url:str) -> bool:
+    """Verifică dacă pagina specificată există și poate fi accesată.""" 
     try:
         rq.get(url, timeout=TIMEOUT).raise_for_status()
         return True
@@ -53,6 +57,7 @@ def page_exists(url:str) -> bool:
 
 #Ex28
 def check_paths(base:str, paths: list[str]):
+    """Verifică codul de stare HTTP pentru fiecare cale relativă specificată."""
     dict = {}
 
     for path in paths:
@@ -65,6 +70,7 @@ def check_paths(base:str, paths: list[str]):
 
 #Ex29
 def get_header(url, name, default="lipsește"):
+    """Returnează valoarea unui header HTTP specificat pentru URL-ul dat."""
     res = rq.get(url, timeout=TIMEOUT)
     return res.headers[name]
 
@@ -72,6 +78,7 @@ def get_header(url, name, default="lipsește"):
 
 #Ex30
 def security_headers(url:str):
+    """Verifică prezența headerelor HTTP de securitate pentru URL-ul specificat."""
     res = rq.get(url, timeout=TIMEOUT)
     d = {
         "Strict-Transport-Security" : True if res.headers.get("Strict-Transport-Security") else False,
@@ -88,6 +95,7 @@ def security_headers(url:str):
 
 #Ex31
 # def score_headers(results: dict):
+#     """Verifica cat din headeri sunt prezenti"""
 #     ctr = 0
 #     for _, val in results.items():
 #         if val: 
@@ -98,10 +106,12 @@ def security_headers(url:str):
 
 #Ex33
 def fetch_robots(base):
+    """Descarcă fișierul robots.txt al site-ului și returnează conținutul acestuia."""
     res = rq.get(base + "/robots.txt", timeout=10)
     return res.text if res.status_code == 200 else None
 
 def disallowed_paths(robots_text):
+    """Extrage și returnează căile interzise din conținutul unui fișier robots.txt."""
     if robots_text == None:
         return 
 
@@ -119,6 +129,7 @@ def disallowed_paths(robots_text):
 
 #Ex33
 def  response_times(*urls):
+    """Măsoară și returnează timpul de răspuns pentru fiecare URL specificat."""
     if len(urls) == 0: 
         return 
 
@@ -134,6 +145,7 @@ def  response_times(*urls):
 
 #Ex34
 def log(message, **details):
+    """Afișează un mesaj împreună cu detaliile suplimentare specificate."""
     str = message
 
     for detail in details:
