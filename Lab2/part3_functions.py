@@ -9,14 +9,14 @@ TIMEOUT = 10
 
 #Ex21
 # def fetch(url:str):
-#     return rq.get(url)
+#     return rq.get(url, timeout=TIMEOUT)
 
 #print(fetch(BASE_URL).text)
 
 #Ex22
 def get_status(url:str) -> int:
     time.sleep(1)
-    res = rq.get(BASE_URL + url) 
+    res = rq.get(BASE_URL + url, timeout=TIMEOUT) 
     return res.status_code
 
 # print(get_status("/"))
@@ -35,7 +35,7 @@ def get_title(html:str) -> str:
     """Extrage titlu din html text."""
     return html[html.find("<title>") + len("<title>") : html.find("</title>")].strip() 
 
-# res = rq.get(BASE_URL)
+# res = rq.get(BASE_URL, timeout=TIMEOUT)
 # print(get_title(res.text))
 # help(get_title)
 
@@ -46,7 +46,7 @@ def get_title(html:str) -> str:
 #Ex27
 def page_exists(url:str) -> bool:
     try:
-        rq.get(url).raise_for_status()
+        rq.get(url, timeout=TIMEOUT).raise_for_status()
         return True
     except rq.RequestException:
         return False
@@ -56,7 +56,7 @@ def check_paths(base:str, paths: list[str]):
     dict = {}
 
     for path in paths:
-        res = rq.get(base + path)
+        res = rq.get(base + path, timeout=TIMEOUT)
         dict[path] = res.status_code
 
     return dict
@@ -65,14 +65,14 @@ def check_paths(base:str, paths: list[str]):
 
 #Ex29
 def get_header(url, name, default="lipsește"):
-    res = rq.get(url)
+    res = rq.get(url, timeout=TIMEOUT)
     return res.headers[name]
 
 #print(get_header(BASE_URL, name="Server"))
 
 #Ex30
 def security_headers(url:str):
-    res = rq.get(url)
+    res = rq.get(url, timeout=TIMEOUT)
     d = {
         "Strict-Transport-Security" : True if res.headers.get("Strict-Transport-Security") else False,
         "Content-Security-Policy" : True if res.headers.get("Content-Security-Policy") else False,
@@ -98,7 +98,7 @@ def security_headers(url:str):
 
 #Ex33
 def fetch_robots(base):
-    res = rq.get(base + "/robots.txt")
+    res = rq.get(base + "/robots.txt", timeout=10)
     return res.text if res.status_code == 200 else None
 
 def disallowed_paths(robots_text):

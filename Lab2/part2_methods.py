@@ -46,11 +46,11 @@ TIMEOUT = 10
 # print(len(res.text.splitlines()), max(res.text.splitlines(),key=len))
 
 #Ex16
-# res = rq.get(BASE_URL)
+# res = rq.get(BASE_URL, timeout=TIMEOUT)
 # print("Conexiune securizata" if res.url.startswith("https://") else "Conexiune nesecurizata")
     
 #Ex17
-# res = rq.get("http://cybercor.org")
+# res = rq.get("http://cybercor.org", timeout=TIMEOUT)
 
 # for resp in res.history:
 #     print(resp.status_code, resp.url)
@@ -58,14 +58,14 @@ TIMEOUT = 10
 # print(res.url)
 
 #Ex18
-# res1 = rq.get(BASE_URL)
+# res1 = rq.get(BASE_URL, timeout=TIMEOUT)
 # res2 = rq.head(BASE_URL)
 
 # print(len(res1.content), len(res2.content))
 #unul cere sa ii fie trimis tot corpul cu header altul doar headerul
 
 #Ex19
-# res = rq.get(BASE_URL)
+# res = rq.get(BASE_URL, timeout=TIMEOUT)
 
 # if len(res.cookies) == 0:
 #     print("There are no coockies")
@@ -78,7 +78,7 @@ TIMEOUT = 10
 # session.headers.update({"User-Agent": "WebLab-Igor Filip"})
 
 # try:
-#     response = session.get(ECHO_URL + "/headers")
+#     response = session.get(ECHO_URL + "/headers", timeout=TIMEOUT)
 #     response.raise_for_status()
 
 #     print(response.text)

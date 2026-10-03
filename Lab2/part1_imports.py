@@ -15,17 +15,17 @@ TIMEOUT = 10  # secunde
 #print(requests.__version__)
 
 #Ex2
-#req = requests.get(BASE_URL)
+#req = requests.get(BASE_URL timeout=TIMEOUT)
 #req = get(BASE_URL)
 #cand ai nevoie doar de o functie din librarie si nu vrei sa consumi spatiu e mai bine sa utilizezi from import dar daca ai nevoie mai mult de o librarie atunci faci simplu imoprt totodata facand asta elimini posibilitatea de a aparea conflicte de nume
 #print(req))
 
 #Ex3
-#print(rq.get(BASE_URL))
+#print(rq.get(BASE_URL, timeout=TIMEOUT))
 #alisal il face mai suor de citit cand utilizezi abrevieri de 2+ litere dar mai greu daca scrii o litera sau cuvinte fara sens nerelatate librariei
 
 #Ex4
-# with urllib.request.urlopen(BASE_URL) as response:
+# with urllib.request.urlopen(BASE_URL, timeout=TIMEOUT) as response:
 #     print(response.status)
 #     body = response.read()
 #     print(body)
@@ -36,11 +36,11 @@ TIMEOUT = 10  # secunde
 
 #Ex6
 #print(help(requests.get))
-#print(requests.get(BASE_URL, timeout=2000))
+#print(requests.get(BASE_URL, timeout=TIMEOUT))
 
 #Ex 7
 # start = time.perf_counter()
-# response = requests.get(BASE_URL)
+# response = requests.get(BASE_URL, timeout=TIMEOUT)
 # end = time.perf_counter()
 # print(f"{end-start:.6f}")
 # print(response.elapsed)
