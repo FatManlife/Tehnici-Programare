@@ -8,9 +8,9 @@ BASE_URL = "https://cybercor.org"
 ECHO_URL = "https://httpbin.org"
 TIMEOUT = 10  
 
-parser = argparse.ArgumentParser("")
-parser.add_argument("url")
-args = parser.parse_args()
+# parser = argparse.ArgumentParser("")
+# parser.add_argument("url")
+# args = parser.parse_args()
 
 
 # print(webtools.fetch(BASE_URL).text)
@@ -21,4 +21,8 @@ args = parser.parse_args()
 #Ex49
 # webtools.create_csv(BASE_URL, ["/", "/robots.txt", "/sitemap.xml"])
 #Ex50
-webtools.site_report(args.url)
+# webtools.site_report(args.url)
+
+#Bonus
+# print(webtools.get_title_bs(BASE_URL))
+print(webtools.extract_links(BASE_URL))

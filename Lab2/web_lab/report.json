@@ -1,0 +1,15 @@
+=== Raport site: https://cybercor.org ===
+{
+    "Cod de stare": 200,
+    "Titlu": "CYBERCOR",
+    "Adres\u0103 IP": "172.67.211.96",
+    "Redirec\u021bion\u0103ri": [],
+    "Scor securitate": "3/5",
+    "Certificat": "20791 de zile r\u0103mase",
+    "Leg\u0103turi": [
+        [],
+        []
+    ],
+    "C\u0103i interzise": []
+}
+Salvat în report.json
